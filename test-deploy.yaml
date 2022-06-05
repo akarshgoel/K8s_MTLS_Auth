@@ -1,0 +1,37 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: test-deploy
+  name: test-deploy
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: test-deploy
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: test-deploy
+    spec:
+      hostPID: true
+      hostNetwork: true
+      dnsPolicy: ClusterFirstWithHostNet
+      containers:
+      - image: akarshgoel/welcome-app:v1
+        name: test-deploy
+        ports:
+        - containerPort: 9191
+        volumeMounts:
+        - name: spire-agent-socket
+          mountPath: /run/spire/sockets/
+          readOnly: false
+      volumes:
+      - name: spire-agent-socket
+        hostPath:
+          path: /run/spire/sockets/
+          type: DirectoryOrCreate
+
