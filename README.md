@@ -1,4 +1,4 @@
-# K8s-mTLS-Auth
+# K8s_mTLS_Auth
 Demo Project - Establish mTLS auth for apps running over k8s cluster
 
 
